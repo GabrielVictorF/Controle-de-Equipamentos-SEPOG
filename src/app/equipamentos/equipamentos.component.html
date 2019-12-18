@@ -1,0 +1,28 @@
+<button class="btn btn-primary btn-sm" routerLink="/novo-equipamento">Criar novo equipamento</button>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Tombamento</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Setor </th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let x of equips | paginate: { itemsPerPage: 30, currentPage: paginaAtual }; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ x.equipamento_tomb }}</td>
+            <td>{{ x.equipamento_descricao }}</td>
+            <td>{{ x.setor_sigla }}</td>
+            <td>{{ x.tipo_equipamento_descricao }}</td>
+            <td><button type="button" class="btn btn-outline-secondary"
+                    [routerLink]="['/editar', x.equipamento_id]">Editar <i class="far fa-edit"></i></button></td>
+        </tr>
+    </tbody>
+</table>
+
+<pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"
+    maxSize="30"></pagination-controls>

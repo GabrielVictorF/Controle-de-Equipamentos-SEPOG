@@ -1,0 +1,17 @@
+<form (ngSubmit)="putEquipamento()">
+    <div class="form-group">
+        <label for="tombamento">Tombamento</label>
+        <input type="text" class="form-control" id="tombamento" [(ngModel)]="equipamento[0].equipamento_tomb" name="tombamento">
+    </div>
+    <div class="form-group">
+        <label for="descricao">Descrição</label>
+        <input type="text" class="form-control" id="descricao" [(ngModel)]="equipamento[0].equipamento_descricao" name="descricao">
+    </div>
+  <div class="form-group">
+      <label for="tipo_equipamento">Tipo de equipamento</label>
+      <select class="form-control" id="tipo_equipamento" [(ngModel)]="equipamento[0].tipo_equipamento_id">
+        <option *ngFor="let x of tipos_equipamento" name="tipo_equipamento" [ngValue]="x.tipo_equipamento_id">{{x.tipo_equipamento_descricao}}</option>
+      </select>
+  </div>
+  {{equipamento.tipo_equipamento_id}}
+    <button type="submit" class="btn btn-primary">Atualizar</button>
