@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
+import { FunctionsService } from '../functions.service';
 
 @Component({
   selector: 'app-novo-equipamento',
@@ -6,10 +8,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./novo-equipamento.component.scss']
 })
 export class NovoEquipamentoComponent implements OnInit {
+  public equipamento: any = {
+    "equipamento_tomb": "",
+    "equipamento_descricao": "",
+    "equipamento_id": 0
+  };
+  public tipos_equipamento;
+  public setores;
 
-  constructor() { }
+  constructor(public api: ApiService, public functions: FunctionsService) { }
 
   ngOnInit() {
+    this.api.getTipoEquipamentos().subscribe(res => this.tipos_equipamento = res);
+    this.api.getSetores().subscribe(res => this.setores = res );
   }
 
+  postEquipamento() {
+    this.api.postEquipamento(this.equipamento).subscribe(res => {
+      this.functions.showToast('Sucesso', 'Equipamento atualizado com sucesso!', 'sucess')
+    }, Error => {
+      this.functions.showToast('Erro!', 'Erro ao atualizar equipamento, favor tentar novamente.', 'error')
+    });
+  }
 }

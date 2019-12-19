@@ -43,5 +43,11 @@ export class ApiService {
     return this.http.put(`${this.URL}cotec/public/equipamento?equipamento_id=${equipamento_id}`, corpoReq, this.httpOptions);
   }
 
-  
+  public postEquipamento(body) {
+    return this.http.post(`${this.URL}cotec/public/equipamento`, body);
+  }
+
+  public getSetores() {
+    return this.http.get(`${this.URL}cotec/public/setor?_order=setor_sigla`);
+  }
 }

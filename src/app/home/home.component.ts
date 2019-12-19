@@ -13,18 +13,19 @@ export class HomeComponent implements OnInit {
     router: '/emprestimos',
     descTexto: 'Visualizar empréstimos.',
     descButton: 'Visualizar empréstimos'
-  }, {
-    titulo: 'Relatórios',
-    imagem: '../../../assets/img/relatorio.jpg',
-    router: '/relatorios',
-    descTexto: 'Diversos tipos de relatórios.',
-    descButton: 'Visualizar relatórios'
-  }, {
+  }, 
+  {
     titulo: 'Equipamentos',
     imagem: '../../../assets/img/ativos.png',
     router: '/equipamentos',
     descTexto: 'Lista os equipamentos.',
     descButton: 'Visualizar ativos'
+  },{
+    titulo: 'Relatórios',
+    imagem: '../../../assets/img/relatorio.jpg',
+    router: '/relatorios',
+    descTexto: 'Diversos tipos de relatórios.',
+    descButton: 'Visualizar relatórios'
   }]
   constructor(public api: ApiService) { }
 

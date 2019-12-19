@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
+import { FunctionsService } from '../functions.service';
 
+declare var $;
 @Component({
   selector: 'app-editar',
   templateUrl: './editar.component.html',
@@ -9,10 +11,13 @@ import { ApiService } from '../api.service';
 })
 export class EditarComponent implements OnInit {
   private equipamento_id = +this.route.snapshot.paramMap.get('equipamento_id');
-  public equipamento;
+  public equipamento: any = [{
+    "equipamento_tomb": "",
+    "equipamento_descricao": ""
+  }];
   public tipos_equipamento;
 
-  constructor(public route: ActivatedRoute, public api: ApiService) { }
+  constructor(public route: ActivatedRoute, public api: ApiService, public functions: FunctionsService) { }
 
   ngOnInit() {
     this.api.getTipoEquipamentos().subscribe(res => this.tipos_equipamento = res);
@@ -21,7 +26,11 @@ export class EditarComponent implements OnInit {
 
 
   putEquipamento() {
-    console.log(this.equipamento[0])
-   // this.api.putEquipamento(this.equipamento_id, this.equipamento).subscribe(res => console.log(res))
+    this.api.putEquipamento(this.equipamento_id, this.equipamento).subscribe(res => {
+      this.functions.showToast('Sucesso', 'Equipamento atualizado com sucesso!', 'sucess')
+    },
+      Error => {
+        this.functions.showToast('Erro!', 'Erro ao atualizar equipamento, favor tentar novamente.', 'error')
+      });
   }
 }

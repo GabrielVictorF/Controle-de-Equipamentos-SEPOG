@@ -1,1 +1,51 @@
-<p>novo-equipamento works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form (ngSubmit)="postEquipamento()">
+                <div class="form-group">
+                    <label for="tombamento">
+                        Tombamento
+                        <i class="fas fa-fingerprint"></i>    
+                    </label>
+                    <input type="text" class="form-control" id="tombamento" [(ngModel)]="equipamento.equipamento_tomb"
+                        name="tombamento">
+                </div>
+                <div class="form-group">
+                    <label for="descricao">
+                        Descrição
+                        <i class="fas fa-info-circle"></i>
+                    </label>
+                    <input type="text" class="form-control" id="descricao"
+                        [(ngModel)]="equipamento.equipamento_descricao" name="descricao">
+                </div>
+                <div class="form-group">
+                    <label for="tipo_equipamento">
+                        Tipo de equipamento
+                        <i class="fas fa-divide"></i>
+                    </label>
+                    <select class="form-control" id="tipo_equipamento" [(ngModel)]="equipamento.tipo_equipamento_id"
+                        name="tipo_equipamento">
+                        <option *ngFor="let x of tipos_equipamento" [ngValue]="x.tipo_equipamento_id">
+                            {{x.tipo_equipamento_descricao}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="setor">
+                        Setor
+                        <i class="fas fa-map-marker-alt"></i>
+                    </label>
+                    <select class="form-control" id="setor" [(ngModel)]="equipamento.setor_id"
+                        name="setor">
+                        <option *ngFor="let x of setores" [ngValue]="x.setor_id">
+                            {{x.setor_descricao}}</option>
+                    </select>
+                </div>
+                {{equipamento.tipo_equipamento_id}}
+                <button type="submit" class="btn btn-primary btn-lg btn-block">
+                    Cadastrar
+                    <i class="fas fa-save"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
