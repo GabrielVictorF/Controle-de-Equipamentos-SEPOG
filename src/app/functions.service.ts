@@ -8,7 +8,9 @@ declare var toast;
 export class FunctionsService {
   constructor() { 
     init({
-     position: 'bottom-right'
+     position: 'bottom-right',
+     fade_out: 400,
+     fade_in: 400
     });
   }
 
@@ -18,8 +20,9 @@ export class FunctionsService {
       description: description,
       timeout: '2000', 
       type: type, 
+      radius: 5,    
       close_color: '#3498db',
-      border_color: '#3498db',
+      border_color: '#3498db'
     }) 
   }
 }
