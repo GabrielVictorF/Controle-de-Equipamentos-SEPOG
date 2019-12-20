@@ -27,7 +27,7 @@ export class EditarComponent implements OnInit {
 
   putEquipamento() {
     this.api.putEquipamento(this.equipamento_id, this.equipamento).subscribe(res => {
-      this.functions.showToast('Sucesso', 'Equipamento atualizado com sucesso!', 'sucess')
+      this.functions.showToast('Equipamento atualizado com sucesso!', 'success')
     },
       Error => {
         this.functions.showToast('Erro!', 'Erro ao atualizar equipamento, favor tentar novamente.', 'error')
