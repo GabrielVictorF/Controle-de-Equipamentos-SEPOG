@@ -25,9 +25,9 @@ export class NovoEquipamentoComponent implements OnInit {
 
   postEquipamento() {
     this.api.postEquipamento(this.equipamento).subscribe(res => {
-      this.functions.showToast('Sucesso', 'Equipamento atualizado com sucesso!', 'sucess')
+      this.functions.showToast('Equipamento atualizado com sucesso!', 'success')
     }, Error => {
-      this.functions.showToast('Erro!', 'Erro ao atualizar equipamento, favor tentar novamente.', 'error')
+      this.functions.showToast('Erro ao cadastrar equipamento, favor tentar novamente.', 'error')
     });
   }
 }

@@ -27,7 +27,7 @@ export class SentryErrorHandler implements ErrorHandler {
   constructor(public functions: FunctionsService) {}
   handleError(error) {
     const eventId = Sentry.captureException(error.originalError || error);
-    this.functions.showToast('Erro', 'erro', 'error');
+    //this.functions.showToast('Erro', 'erro', 'error');
     //Sentry.showReportDialog({ eventId });
   }
 }

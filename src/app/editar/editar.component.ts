@@ -30,7 +30,7 @@ export class EditarComponent implements OnInit {
       this.functions.showToast('Equipamento atualizado com sucesso!', 'success')
     },
       Error => {
-        this.functions.showToast('Erro!', 'Erro ao atualizar equipamento, favor tentar novamente.', 'error')
+        this.functions.showToast('Erro ao atualizar equipamento, favor tentar novamente.', 'error')
       });
   }
 }
