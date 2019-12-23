@@ -50,4 +50,8 @@ export class ApiService {
   public getSetores() {
     return this.http.get(`${this.URL}cotec/public/setor?_order=setor_sigla`);
   }
+
+  public getQtdEquipamentosCat() {
+    return this.http.get(`${this.URL}_QUERIES/get/count_tipo_equipamento`, this.httpOptions);
+  }
 }

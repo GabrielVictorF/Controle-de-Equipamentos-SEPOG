@@ -1,1 +1,20 @@
-<p>relatorios works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-primary btn-block" (click)="qtdEquipamentosCat()">Quantidade de equipamentos por
+                categoria</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div>
+                <div style="display: block">
+                    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+                        [legend]="barChartLegend" [chartType]="barChartType">
+                    </canvas>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

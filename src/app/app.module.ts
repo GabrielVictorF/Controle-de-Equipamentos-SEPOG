@@ -5,6 +5,7 @@ import { NgxPaginationModule } from 'ngx-pagination'; // Módulo da dependência
 import { FormsModule } from '@angular/forms';
 import { Ng2SearchPipeModule } from 'ng2-search-filter'; // Módulo do PIPE de pesquisa
 import * as Sentry from "@sentry/browser"; //Sentry para captura de erros
+import { ChartsModule } from 'ng2-charts'; // Geração de gráficos
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -50,7 +51,8 @@ export class SentryErrorHandler implements ErrorHandler {
     HttpClientModule,
     NgxPaginationModule,
     FormsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    ChartsModule
   ],
   providers: [{ provide: ErrorHandler, useClass: SentryErrorHandler }],
   bootstrap: [AppComponent]
