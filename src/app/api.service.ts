@@ -54,4 +54,8 @@ export class ApiService {
   public getQtdEquipamentosCat() {
     return this.http.get(`${this.URL}_QUERIES/get/count_tipo_equipamento`, this.httpOptions);
   }
+
+  public getQtdEquipamentosSetor() {
+    return this.http.get(`${this.URL}_QUERIES/get/count_equipamento_setor`, this.httpOptions);
+  }
 }

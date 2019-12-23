@@ -14,6 +14,20 @@
         </div>
     </div>
     <div class="row">
+            <div class="col">
+                <button class="btn btn-primary btn-block" (click)="qtdEquipamentosSetor()">
+                    Quantidade de equipamentos por
+                    setor
+                    <div *ngIf="show">
+                        <i class="fas fa-arrow-circle-up"></i>
+                    </div>
+                    <div *ngIf="show == false">
+                            <i class="fas fa-arrow-circle-down" ></i>
+                    </div> 
+                </button>
+            </div>
+        </div>
+    <div class="row">
         <div class="col">
             <div>
                 <div style="display: block" *ngIf="show">
