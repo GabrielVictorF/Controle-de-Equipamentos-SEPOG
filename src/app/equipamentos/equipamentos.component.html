@@ -1,4 +1,4 @@
-<div class="container">
+
     <div class="row">
         <div class="col">
             <button class="btn btn-primary btn-block" routerLink="/novo-equipamento">
@@ -7,7 +7,7 @@
             </button>
         </div>
     </div>
-    <div class="row">
+    <!--<div class="row"> PESQUISA
         <div class="col">
             <form>
                 <div class="form-group">
@@ -19,11 +19,58 @@
                 </div>
             </form>
         </div>
+    </div> -->
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label for="tipo_equipamento">
+                    Tipo de equipamento
+                    <i class="fas fa-divide"></i>
+                </label>
+                <select class="form-control" id="tipo_equipamento" [(ngModel)]="filtro.tipo_equipamento_id"
+                    name="tipo_equipamento">
+                    <option *ngFor="let x of tipos_equipamento" [ngValue]="x.tipo_equipamento_id">
+                        {{x.tipo_equipamento_descricao}}</option>
+                </select>
+            </div>
+        </div>
     </div>
 
     <div class="row">
         <div class="col">
-            <table class="table table-striped table-responsive shadow">
+            <div class="form-group">
+                <label for="setor">
+                    Setor
+                    <i class="fas fa-map-marker-alt"></i>
+                </label>
+                <select class="form-control" id="setor" [(ngModel)]="filtro.setor_id"
+                    name="setor">
+                    <option *ngFor="let x of setores" [ngValue]="x.setor_id">
+                        {{x.setor_sigla}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <button type="button" class="btn btn-outline-primary" *ngIf="filtro.tipo_equipamento_id > 0 || filtro.setor_id > 0" (click)="resetCampos()">Resetar campos <i class="fas fa-eraser"></i></button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-primary btn-block"(click)="getResultsFilter()">
+                Executar filtro
+                <i class="fab fa-searchengin"></i>
+            </button>
+        </div>
+    </div>
+ 
+
+    <div class="row">
+        <div class="col">
+            <table class="table table-striped table-responsive shadow table-bordered table-hover">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -31,6 +78,10 @@
                         <th scope="col">Descrição</th>
                         <th scope="col">Setor </th>
                         <th scope="col">Tipo</th>
+                        <th scope="col">Modelo</th>
+                        <th scope="col">Marca</th>
+                        <th scope="col">N° Série</th>
+                        <th scope="col">Garantia</th>
                         <th scope="col">Ações</th>
                     </tr>
                 </thead>
@@ -41,10 +92,14 @@
                         <td>{{ x.equipamento_tomb }}</td>
                         <td>{{ x.equipamento_descricao }}</td>
                         <td>{{ x.setor_sigla }}</td>
-                        <td>{{ x.tipo_equipamento_descricao }}</td>
+                        <td class="align-middle">{{ x.tipo_equipamento_descricao }}</td>
+                        <td>{{ x.modelo }}</td>
+                        <td>{{ x.marca }}</td>
+                        <td>{{ x.num_serie }}</td>
+                        <td>garantia</td>
                         <td><button type="button" class="btn btn-outline-secondary"
-                                [routerLink]="['/editar', x.equipamento_id]">Editar <i class="far fa-edit"></i></button>
-                        </td>
+                            [routerLink]="['/editar', x.equipamento_id]">Editar <i class="far fa-edit"></i></button>
+                    </td>
                     </tr>
                 </tbody>
             </table>
@@ -56,4 +111,3 @@
                 responsive="true" maxSize="30"></pagination-controls>
         </div>
     </div>
-</div>

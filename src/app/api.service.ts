@@ -20,10 +20,16 @@ export class ApiService {
     return this.http.get(`${this.URL}cotec/public/tipo_equipamento`, this.httpOptions);
   }
 
-  public getEquipamentos(equipamento_id?) {
+  public getEquipamentos(equipamento_id?, tipo_equipamento_id?, setor_id?) {
     let url = `${this.URL}_QUERIES/get/equipamentos-full`;
-    if (equipamento_id)
-      url += `?equipId=${equipamento_id}`;
+
+    equipamento_id ? url += `?equipId=${equipamento_id}` : ''
+
+    tipo_equipamento_id ? url += `?tipoEquipId=${tipo_equipamento_id}`: ''
+
+    setor_id && tipo_equipamento_id ? url += `&setorId=${setor_id}` : ''
+   // setor_id ? url +=  `?setorId=${setor_id}` : ''
+
     return this.http.get(url, this.httpOptions);
   }
 
