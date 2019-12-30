@@ -1,4 +1,4 @@
-
+<div class="container-fluid">
     <div class="row">
         <div class="col">
             <button class="btn btn-primary btn-block" routerLink="/novo-equipamento">
@@ -7,25 +7,28 @@
             </button>
         </div>
     </div>
-    <!--<div class="row"> PESQUISA
+
+    <div class="row">
         <div class="col">
             <form>
-                <div class="form-group">
-                    <label for="pesquisa">
-                        <i class="fab fa-searchengin"></i>
-                        Pesquisar
-                    </label>
-                    <input type="search" [(ngModel)]="term" id="pesquisa" name="pesquisa" placeholder="pesquisar">
+                <label class="sr-only" for="inlineFormInputGroup">Pesquisar na tela atual</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fas fa-search"></i></div>
+                    </div>
+                    <input class="form-control" type="search" [(ngModel)]="term" id="pesquisa" name="pesquisa"
+                        placeholder="pesquisar na tela atual...">
                 </div>
             </form>
         </div>
-    </div> -->
+    </div>
+
     <div class="row">
         <div class="col">
             <div class="form-group">
                 <label for="tipo_equipamento">
                     Tipo de equipamento
-                    <i class="fas fa-divide"></i>
+                    <i class="fas fa-desktop"></i>
                 </label>
                 <select class="form-control" id="tipo_equipamento" [(ngModel)]="filtro.tipo_equipamento_id"
                     name="tipo_equipamento">
@@ -34,19 +37,41 @@
                 </select>
             </div>
         </div>
-    </div>
-
-    <div class="row">
         <div class="col">
             <div class="form-group">
                 <label for="setor">
                     Setor
                     <i class="fas fa-map-marker-alt"></i>
                 </label>
-                <select class="form-control" id="setor" [(ngModel)]="filtro.setor_id"
-                    name="setor">
+                <select class="form-control" id="setor" [(ngModel)]="filtro.setor_id" name="setor">
                     <option *ngFor="let x of setores" [ngValue]="x.setor_id">
                         {{x.setor_sigla}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label for="modelo">
+                    Modelo
+                    <i class="fas fa-desktop"></i>
+                </label>
+                <select class="form-control" id="modelo" [(ngModel)]="filtro.modelo" name="modelo">
+                    <option *ngFor="let x of modelos" [ngValue]="x.modelo">
+                        {{x.modelo}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label for="fabricante">
+                    Fabricante
+                    <i class="fas fa-desktop"></i>
+                </label>
+                <select class="form-control" id="" [(ngModel)]="filtro.fabricante" name="fabricante">
+                    <option *ngFor="let x of modelos" [ngValue]="x.modelo">
+                        {{x.modelo}}</option>
                 </select>
             </div>
         </div>
@@ -54,21 +79,34 @@
 
     <div class="row">
         <div class="col">
-            <button type="button" class="btn btn-outline-primary" *ngIf="filtro.tipo_equipamento_id > 0 || filtro.setor_id > 0" (click)="resetCampos()">Resetar campos <i class="fas fa-eraser"></i></button>
+            <button type="button" class="btn btn-outline-primary"
+                *ngIf="filtro.tipo_equipamento_id > 0 || filtro.setor_id > 0" (click)="resetCampos()">Resetar campos <i
+                    class="fas fa-eraser"></i></button>
         </div>
     </div>
 
     <div class="row">
         <div class="col">
-            <button class="btn btn-primary btn-block"(click)="getResultsFilter()">
-                Executar filtro
+            <button class="btn btn-primary btn-block" (click)="getResultsFilter()">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+                    *ngIf="carregando"></span>
+                <span *ngIf="getSemFiltros()">Exibir equipamentos</span>
+                <span *ngIf="!getSemFiltros()">Executar filtros</span>
                 <i class="fab fa-searchengin"></i>
             </button>
         </div>
     </div>
- 
 
     <div class="row">
+        <div class="col-md-auto">
+            <div class="alert alert-primary" role="alert">
+                Total de resultados: {{equips.length}}
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row" *ngIf="equips.length > 0">
         <div class="col">
             <table class="table table-striped table-responsive shadow table-bordered table-hover">
                 <thead>
@@ -79,7 +117,7 @@
                         <th scope="col">Setor </th>
                         <th scope="col">Tipo</th>
                         <th scope="col">Modelo</th>
-                        <th scope="col">Marca</th>
+                        <th scope="col">Fabricante</th>
                         <th scope="col">N° Série</th>
                         <th scope="col">Garantia</th>
                         <th scope="col">Ações</th>
@@ -91,15 +129,15 @@
                         <th scope="row">{{ i + 1 }}</th>
                         <td>{{ x.equipamento_tomb }}</td>
                         <td>{{ x.equipamento_descricao }}</td>
-                        <td>{{ x.setor_sigla }}</td>
-                        <td class="align-middle">{{ x.tipo_equipamento_descricao }}</td>
+                        <td>{{ x.setor.setor_sigla }}</td>
+                        <td class="align-middle">{{ x.tipo_equipamento.tipo_equipamento_descricao }}</td>
                         <td>{{ x.modelo }}</td>
-                        <td>{{ x.marca }}</td>
+                        <td>{{ x.fabricante }}</td>
                         <td>{{ x.num_serie }}</td>
                         <td>garantia</td>
                         <td><button type="button" class="btn btn-outline-secondary"
-                            [routerLink]="['/editar', x.equipamento_id]">Editar <i class="far fa-edit"></i></button>
-                    </td>
+                                [routerLink]="['/editar', x.equipamento_id]">Editar <i class="far fa-edit"></i></button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -111,3 +149,4 @@
                 responsive="true" maxSize="30"></pagination-controls>
         </div>
     </div>
+</div>

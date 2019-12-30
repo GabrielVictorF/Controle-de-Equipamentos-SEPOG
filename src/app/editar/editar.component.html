@@ -5,7 +5,7 @@
                 <div class="form-group">
                     <label for="tombamento">
                         Tombamento
-                        <i class="fas fa-fingerprint"></i> 
+                        <i class="fas fa-fingerprint"></i>
                     </label>
                     <input type="text" class="form-control" id="tombamento"
                         [(ngModel)]="equipamento[0].equipamento_tomb" name="tombamento">
@@ -28,6 +28,29 @@
                         <option *ngFor="let x of tipos_equipamento" [ngValue]="x.tipo_equipamento_id">
                             {{x.tipo_equipamento_descricao}}</option>
                     </select>
+                </div>
+                <div class="form-group">
+                    <label for="modelo">
+                        Modelo
+                        <i class="fas fa-divide"></i>
+                    </label>
+                    <input type="text" class="form-control" id="modelo" [(ngModel)]="equipamento[0].modelo"
+                        name="modelo">
+                </div>
+                <div class="form-group">
+                    <label for="modelo">
+                        Marca
+                        <i class="fas fa-divide"></i>
+                    </label>
+                    <input type="text" class="form-control" id="marca" [(ngModel)]="equipamento[0].marca" name="marca">
+                </div>
+                <div class="form-group">
+                    <label for="num-serie">
+                        N° Série
+                        <i class="fas fa-divide"></i>
+                    </label>
+                    <input type="text" class="form-control" id="num-serie" [(ngModel)]="equipamento[0].num_serie"
+                        name="num-serie">
                 </div>
                 {{equipamento.tipo_equipamento_id}}
                 <button type="submit" class="btn btn-primary btn-lg btn-block">

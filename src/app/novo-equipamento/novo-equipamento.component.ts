@@ -11,7 +11,10 @@ export class NovoEquipamentoComponent implements OnInit {
   public equipamento: any = {
     "equipamento_tomb": "",
     "equipamento_descricao": "",
-    "equipamento_id": 0
+    "equipamento_id": 0,
+    "modelo": "",
+    "fabricante": "",
+    "num_serie": ""
   };
   public tipos_equipamento;
   public setores;

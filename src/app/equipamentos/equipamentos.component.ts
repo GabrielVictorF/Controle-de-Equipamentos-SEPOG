@@ -14,20 +14,25 @@ export class EquipamentosComponent implements OnInit {
     tipo_equipamento_id: 0,
     setor_id: 0
   }
+  private carregando = false;
 
   constructor(public api: ApiService) { }
 
   ngOnInit() {
     this.api.getTipoEquipamentos().subscribe(res => this.tipos_equipamento = res);
     this.api.getSetores().subscribe(res => this.setores = res );
-    this.api.getCountEquipamentos().subscribe(res => {
-      this.api.getEquipamentos().subscribe(res => this.equips = res);
-    });  
+    //this.api.getEquipamentos().subscribe(res => this.equips = res);
+  }
+
+  public getSemFiltros() {
+    if (this.filtro.tipo_equipamento_id == 0 && this.filtro.setor_id == 0)
+      return true;
+    return false;
   }
 
   public getResultsFilter() {
-    this.api.getEquipamentos(null, this.filtro.tipo_equipamento_id, this.filtro.setor_id).subscribe(res => this.equips = res)
-    //this.filtro.setor_id > 0 ?  
+    this.carregando = true;
+   this.api.getEquipamentos(null, this.filtro.tipo_equipamento_id, this.filtro.setor_id).subscribe(res => {this.equips = res, this.carregando = false}) 
   }
 
   public resetCampos() {

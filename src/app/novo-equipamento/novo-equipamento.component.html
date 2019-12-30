@@ -5,7 +5,7 @@
                 <div class="form-group">
                     <label for="tombamento">
                         Tombamento
-                        <i class="fas fa-fingerprint"></i>    
+                        <i class="fas fa-fingerprint"></i>
                     </label>
                     <input type="text" class="form-control" id="tombamento" [(ngModel)]="equipamento.equipamento_tomb"
                         name="tombamento">
@@ -21,7 +21,7 @@
                 <div class="form-group">
                     <label for="tipo_equipamento">
                         Tipo de equipamento
-                        <i class="fas fa-divide"></i>
+                        <i class="fas fa-list-alt"></i>
                     </label>
                     <select class="form-control" id="tipo_equipamento" [(ngModel)]="equipamento.tipo_equipamento_id"
                         name="tipo_equipamento">
@@ -34,11 +34,33 @@
                         Setor
                         <i class="fas fa-map-marker-alt"></i>
                     </label>
-                    <select class="form-control" id="setor" [(ngModel)]="equipamento.setor_id"
-                        name="setor">
+                    <select class="form-control" id="setor" [(ngModel)]="equipamento.setor_id" name="setor">
                         <option *ngFor="let x of setores" [ngValue]="x.setor_id">
                             {{x.setor_descricao}}</option>
                     </select>
+                </div>
+                <div class="form-group">
+                    <label for="modelo">
+                        Modelo
+                        <i class="fas fa-project-diagram"></i>
+                    </label>
+                    <input type="text" class="form-control" id="modelo" [(ngModel)]="equipamento.modelo" name="modelo">
+                </div>
+                <div class="form-group">
+                    <label for="fabricante">
+                        Fabricante
+                        <i class="fas fa-industry"></i>
+                    </label>
+                    <input type="text" class="form-control" id="fabricante" [(ngModel)]="equipamento.fabricante"
+                        name="fabricante">
+                </div>
+                <div class="form-group">
+                    <label for="num-serie">
+                        N° Série
+                        <i class="fas fa-list-ol"></i>
+                    </label>
+                    <input type="text" class="form-control" id="num-serie" [(ngModel)]="equipamento.num_serie"
+                        name="num-serie">
                 </div>
                 {{equipamento.tipo_equipamento_id}}
                 <button type="submit" class="btn btn-primary btn-lg btn-block">
