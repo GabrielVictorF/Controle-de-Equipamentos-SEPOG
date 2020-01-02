@@ -13,7 +13,7 @@ export class FunctionsService {
       position: 'north-east',
       // Self destroy in 5 seconds
       timeout: 5000,
-      type: type,
+      type: type, //success warning info error
       closeOnClick: true
     });
   }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
+import { FunctionsService } from '../functions.service';
 
 @Component({
   selector: 'app-equipamentos',
@@ -16,10 +17,14 @@ export class EquipamentosComponent implements OnInit {
   }
   private carregando = false;
 
-  constructor(public api: ApiService) { }
+  constructor(public api: ApiService, public functions: FunctionsService) { }
 
   ngOnInit() {
-    this.api.getTipoEquipamentos().subscribe(res => this.tipos_equipamento = res);
+    this.api.getTipoEquipamentos().subscribe(res =>{
+      this.tipos_equipamento = res
+    }, Error => {
+      this.functions.showToast('Erro ao obter a lista de equipamentos, favor recarregar a página!', 'error')
+    });
     this.api.getSetores().subscribe(res => this.setores = res );
     //this.api.getEquipamentos().subscribe(res => this.equips = res);
   }
@@ -32,7 +37,12 @@ export class EquipamentosComponent implements OnInit {
 
   public getResultsFilter() {
     this.carregando = true;
-   this.api.getEquipamentos(null, this.filtro.tipo_equipamento_id, this.filtro.setor_id).subscribe(res => {this.equips = res, this.carregando = false}) 
+    this.api.getEquipamentos(null, this.filtro.tipo_equipamento_id, this.filtro.setor_id).subscribe(res => {
+      this.equips = res, this.carregando = false
+    },  Error => {
+      this.functions.showToast('Erro ao obter a lista de equipamentos, favor recarregar a página!', 'error'),
+      this.carregando = false
+    }) 
   }
 
   public resetCampos() {

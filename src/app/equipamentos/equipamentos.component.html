@@ -98,8 +98,8 @@
     </div>
 
     <div class="row">
-        <div class="col-md-auto">
-            <div class="alert alert-primary" role="alert">
+        <div class="col d-flex justify-content-center">
+            <div class="alert" role="alert" [ngClass]="equips.length == 0? 'alert-danger' : 'alert-success'">
                 Total de resultados: {{equips.length}}
             </div>
         </div>
@@ -143,7 +143,7 @@
             </table>
         </div>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="equips.length > 0">
         <div class="col">
             <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo"
                 responsive="true" maxSize="30"></pagination-controls>
