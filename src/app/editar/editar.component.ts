@@ -23,10 +23,15 @@ export class EditarComponent implements OnInit {
   constructor(public route: ActivatedRoute, public router: Router, public api: ApiService, public functions: FunctionsService) { }
 
   ngOnInit() {
-    this.api.getTipoEquipamentos().subscribe(res => this.tipos_equipamento = res);
-    this.api.getEquipamentos(this.equipamento_id).subscribe(res => this.equipamento = res);
+    this.api.getTipoEquipamentos().subscribe(res => {
+      this.tipos_equipamento = res
+    }, Error => {
+      this.functions.showToast('Erro ao obter categoria de equipamentos, favor recarregar a página', 'error')
+    });
+    this.api.getEquipamentos(this.equipamento_id).subscribe(res => {
+      this.equipamento = res
+    }, Error => this.functions.showToast('Erro ao obter categoria de equipamentos, favor recarregar a página', 'error'));
   }
-
 
   putEquipamento() {
     this.api.putEquipamento(this.equipamento_id, this.equipamento).subscribe(res => {

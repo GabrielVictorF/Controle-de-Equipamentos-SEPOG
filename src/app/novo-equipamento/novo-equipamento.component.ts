@@ -22,8 +22,12 @@ export class NovoEquipamentoComponent implements OnInit {
   constructor(public api: ApiService, public functions: FunctionsService) { }
 
   ngOnInit() {
-    this.api.getTipoEquipamentos().subscribe(res => this.tipos_equipamento = res);
-    this.api.getSetores().subscribe(res => this.setores = res );
+    this.api.getTipoEquipamentos().subscribe(res => {
+      this.tipos_equipamento = res
+    }, Error => this.functions.showToast('Erro ao obter categoria de equipamentos, favor recarregar a página', 'error'));
+    this.api.getSetores().subscribe(res => {
+      this.setores = res
+     }, Error => this.functions.showToast('Erro ao obter categoria de equipamentos, favor recarregar a página', 'error'));
   }
 
   postEquipamento() {

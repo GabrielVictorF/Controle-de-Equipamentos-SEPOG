@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
+import { FunctionsService } from '../functions.service';
 
 @Component({
   selector: 'app-relatorios',
@@ -20,7 +21,7 @@ export class RelatoriosComponent implements OnInit {
   //public barChartData: any = [{ data: [], label: '' }];
 
 
-  constructor(public api: ApiService) { }
+  constructor(public api: ApiService, public functions: FunctionsService) { }
 
   ngOnInit() {
     console.log(this.barChartData)
@@ -30,7 +31,7 @@ export class RelatoriosComponent implements OnInit {
     this.api.getQtdEquipamentosCat().subscribe(res => {
       this.relatorio = res,
         this.aplicaDados(0)
-    })
+    }, Error => this.functions.showToast('Erro ao obter categoria de equipamentos, favor recarregar a página', 'error'))
   }
 
   aplicaDados(view) {
@@ -55,6 +56,6 @@ export class RelatoriosComponent implements OnInit {
     this.api.getQtdEquipamentosSetor().subscribe(res => {
       this.relatorio = res,
         this.aplicaDados(1)
-    })
+    }, Error => this.functions.showToast('Erro ao obter categoria de equipamentos, favor recarregar a página', 'error'))
   }
 }

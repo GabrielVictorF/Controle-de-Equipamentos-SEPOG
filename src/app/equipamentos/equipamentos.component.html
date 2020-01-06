@@ -35,6 +35,7 @@
                     <option *ngFor="let x of tipos_equipamento" [ngValue]="x.tipo_equipamento_id">
                         {{x.tipo_equipamento_descricao}}</option>
                 </select>
+                <button></button>
             </div>
         </div>
         <div class="col">
@@ -99,7 +100,7 @@
 
     <div class="row">
         <div class="col d-flex justify-content-center">
-            <div class="alert" role="alert" [ngClass]="equips.length == 0? 'alert-danger' : 'alert-success'">
+            <div class="alert shadow-sm p-3 mb-5 bg-white rounded" role="alert" [ngClass]="equips.length == 0? 'alert-danger' : 'alert-success'">
                 Total de resultados: {{equips.length}}
             </div>
         </div>
@@ -126,7 +127,7 @@
                 <tbody>
                     <tr
                         *ngFor="let x of equips | filter:term | paginate: { itemsPerPage: 30, currentPage: paginaAtual }; let i = index">
-                        <th scope="row">{{ i + 1 }}</th>
+                        <th scope="row">{{ (30 * (paginaAtual - 1) + i) + 1 }}</th>
                         <td>{{ x.equipamento_tomb }}</td>
                         <td>{{ x.equipamento_descricao }}</td>
                         <td>{{ x.setor.setor_sigla }}</td>

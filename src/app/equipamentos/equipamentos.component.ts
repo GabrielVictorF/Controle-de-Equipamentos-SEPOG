@@ -16,6 +16,7 @@ export class EquipamentosComponent implements OnInit {
     setor_id: 0
   }
   private carregando = false;
+  private paginaAtual = 1;
 
   constructor(public api: ApiService, public functions: FunctionsService) { }
 
@@ -25,7 +26,9 @@ export class EquipamentosComponent implements OnInit {
     }, Error => {
       this.functions.showToast('Erro ao obter a lista de equipamentos, favor recarregar a página!', 'error')
     });
-    this.api.getSetores().subscribe(res => this.setores = res );
+    this.api.getSetores().subscribe(res => {
+      this.setores = res
+     }, Error => this.functions.showToast('Erro ao obter categoria de equipamentos, favor recarregar a página', 'error') );
     //this.api.getEquipamentos().subscribe(res => this.equips = res);
   }
 

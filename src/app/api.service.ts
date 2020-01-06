@@ -40,7 +40,7 @@ export class ApiService {
         "tipo_equipamento_id": body[0].tipo_equipamento_id,
         "setor_id": body[0].setor_id,
         "modelo": body[0].modelo,
-        "marca": body[0].marca,
+        "fabricante": body[0].fabricante,
         "num_serie": body[0].num_serie
     };
     console.log(corpoReq)
