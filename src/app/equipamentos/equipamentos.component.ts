@@ -43,7 +43,7 @@ export class EquipamentosComponent implements OnInit {
   }
 
   public getSemFiltros() {
-    if (this.filtro.tipo_equipamento_id == 0 && this.filtro.setor_id == 0)
+    if (this.filtro.tipo_equipamento_id == 0 && this.filtro.setor_id == 0 && this.filtro.modelo == '' && this.filtro.fabricante == '')
       return true;
     return false;
   }
@@ -59,7 +59,9 @@ export class EquipamentosComponent implements OnInit {
   }
 
   public resetCampos() {
-    this.filtro.setor_id = 0;
-    this.filtro.tipo_equipamento_id = 0;
+    this.filtro.setor_id = 0
+    this.filtro.tipo_equipamento_id = 0
+    this.filtro.fabricante = '' 
+    this.filtro.modelo = ''
   }
 }
