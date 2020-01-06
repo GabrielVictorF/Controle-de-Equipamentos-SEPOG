@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { encode } from 'punycode';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +18,10 @@ export class ApiService {
   constructor(public http: HttpClient) { }
 
   public getTipoEquipamentos() {
-    return this.http.get(`${this.URL}tipo_equipamento`, this.httpOptions);
+    return this.http.get(`${this.URL}tipo_equipamento?order=tipo_equipamento_descricao`, this.httpOptions);
   }
 
-  public getEquipamentos(equipamento_id?, tipo_equipamento_id?, setor_id?) {
+  public getEquipamentos(equipamento_id?, tipo_equipamento_id?, setor_id?, fabricante?, modelo?) {
     let url = `${this.URL}equipamento?select=*,setor(*),tipo_equipamento(*)`;
 
     equipamento_id ? url += `&equipamento_id=eq.${equipamento_id}` : ''
@@ -28,6 +29,10 @@ export class ApiService {
     tipo_equipamento_id ? url += `&tipo_equipamento_id=eq.${tipo_equipamento_id}`: ''
 
     setor_id ? url += `&setor_id=eq.${setor_id}` : ''
+
+    fabricante? url += `&fabricante=eq.${fabricante}` : ''
+
+    modelo? url += `&modelo=eq.${modelo}` : ''
   
     return this.http.get(url, this.httpOptions);
   }
@@ -56,10 +61,18 @@ export class ApiService {
   }
 
   public getQtdEquipamentosCat() {
-    return this.http.get(`${this.URL}_QUERIES/get/count_tipo_equipamento`, this.httpOptions);
+    return this.http.get(`${this.URL}count_tipo_equipamento`, this.httpOptions);
   }
 
   public getQtdEquipamentosSetor() {
-    return this.http.get(`${this.URL}_QUERIES/get/count_equipamento_setor`, this.httpOptions);
+    return this.http.get(`${this.URL}count_equipamento_setor`, this.httpOptions);
+  }
+
+  public getGroupEquipFabricante() {
+    return this.http.get(`${this.URL}group_equip_fabricante`, this.httpOptions);
+  }
+
+  public getGroupEquipModelo() {
+    return this.http.get(`${this.URL}group_equip_modelo`, this.httpOptions);
   }
 }

@@ -71,8 +71,8 @@
                     <i class="fas fa-desktop"></i>
                 </label>
                 <select class="form-control" id="" [(ngModel)]="filtro.fabricante" name="fabricante">
-                    <option *ngFor="let x of modelos" [ngValue]="x.modelo">
-                        {{x.modelo}}</option>
+                    <option *ngFor="let x of fabricantes" [ngValue]="x.fabricante">
+                        {{x.fabricante}}</option>
                 </select>
             </div>
         </div>
@@ -92,8 +92,8 @@
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
                     *ngIf="carregando"></span>
                 <span *ngIf="getSemFiltros()">Exibir equipamentos</span>
-                <span *ngIf="!getSemFiltros()">Executar filtros</span>
-                <i class="fab fa-searchengin"></i>
+                <span *ngIf="!getSemFiltros()">Executar pesquisa com filtros</span>
+                <i class="fab fa-searchengin" style="margin-left: 0.5rem;"></i>
             </button>
         </div>
     </div>
@@ -129,7 +129,7 @@
                         *ngFor="let x of equips | filter:term | paginate: { itemsPerPage: 30, currentPage: paginaAtual }; let i = index">
                         <th scope="row">{{ (30 * (paginaAtual - 1) + i) + 1 }}</th>
                         <td>{{ x.equipamento_tomb }}</td>
-                        <td>{{ x.equipamento_descricao }}</td>
+                        <td class="text-break">{{ x.equipamento_descricao }}</td>
                         <td>{{ x.setor.setor_sigla }}</td>
                         <td class="align-middle">{{ x.tipo_equipamento.tipo_equipamento_descricao }}</td>
                         <td>{{ x.modelo }}</td>

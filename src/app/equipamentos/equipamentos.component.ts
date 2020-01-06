@@ -10,10 +10,14 @@ import { FunctionsService } from '../functions.service';
 export class EquipamentosComponent implements OnInit {
   public equips: any = [];
   public setores; 
+  public fabricantes;
+  public modelos;
   public tipos_equipamento;
   public filtro = {
     tipo_equipamento_id: 0,
-    setor_id: 0
+    setor_id: 0,
+    fabricante: '',
+    modelo: ''
   }
   private carregando = false;
   private paginaAtual = 1;
@@ -21,11 +25,17 @@ export class EquipamentosComponent implements OnInit {
   constructor(public api: ApiService, public functions: FunctionsService) { }
 
   ngOnInit() {
-    this.api.getTipoEquipamentos().subscribe(res =>{
+    this.api.getTipoEquipamentos().subscribe(res => {
       this.tipos_equipamento = res
     }, Error => {
       this.functions.showToast('Erro ao obter a lista de equipamentos, favor recarregar a página!', 'error')
     });
+      this.api.getGroupEquipFabricante().subscribe(res => {
+        this.fabricantes = res;
+      })
+      this.api.getGroupEquipModelo().subscribe(res => {
+        this.modelos = res;
+      })
     this.api.getSetores().subscribe(res => {
       this.setores = res
      }, Error => this.functions.showToast('Erro ao obter categoria de equipamentos, favor recarregar a página', 'error') );
@@ -40,7 +50,7 @@ export class EquipamentosComponent implements OnInit {
 
   public getResultsFilter() {
     this.carregando = true;
-    this.api.getEquipamentos(null, this.filtro.tipo_equipamento_id, this.filtro.setor_id).subscribe(res => {
+    this.api.getEquipamentos(null, this.filtro.tipo_equipamento_id, this.filtro.setor_id, this.filtro.fabricante, this.filtro.modelo).subscribe(res => {
       this.equips = res, this.carregando = false
     },  Error => {
       this.functions.showToast('Erro ao obter a lista de equipamentos, favor recarregar a página!', 'error'),
