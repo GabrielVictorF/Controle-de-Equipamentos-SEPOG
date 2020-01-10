@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { RelatoriosComponent } from './relatorios/relatorios.component';
-import { EmprestimosComponent } from './emprestimos/emprestimos.component';
+import { MovimentacoesComponent } from './movimentacoes/movimentacoes.component';
 import { EquipamentosComponent } from './equipamentos/equipamentos.component';
 import { EditarComponent } from './editar/editar.component';
 import { NovoEquipamentoComponent } from './novo-equipamento/novo-equipamento.component';
@@ -11,7 +11,7 @@ import { NovoEquipamentoComponent } from './novo-equipamento/novo-equipamento.co
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'relatorios', component: RelatoriosComponent },
-  { path: 'emprestimos', component: EmprestimosComponent },
+  { path: 'movimentacoes', component: MovimentacoesComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'equipamentos', component: EquipamentosComponent },
   { path: 'editar/:equipamento_id', component: EditarComponent},

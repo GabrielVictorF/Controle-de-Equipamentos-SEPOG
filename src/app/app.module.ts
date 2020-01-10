@@ -12,12 +12,12 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { RelatoriosComponent } from './relatorios/relatorios.component';
-import { EmprestimosComponent } from './emprestimos/emprestimos.component';
 import { FooterComponent } from './footer/footer.component';
 import { EquipamentosComponent } from './equipamentos/equipamentos.component';
 import { EditarComponent } from './editar/editar.component';
 import { NovoEquipamentoComponent } from './novo-equipamento/novo-equipamento.component';
 import { FunctionsService } from './functions.service';
+import { MovimentacoesComponent } from './movimentacoes/movimentacoes.component';
 
 Sentry.init({
   dsn: "https://e11bf940a0ff4e39b493d3f0a59ee0b7@sentry.io/1863399"
@@ -39,11 +39,11 @@ export class SentryErrorHandler implements ErrorHandler {
     NavbarComponent,
     HomeComponent,
     RelatoriosComponent,
-    EmprestimosComponent,
     FooterComponent,
     EquipamentosComponent,
     EditarComponent,
-    NovoEquipamentoComponent
+    NovoEquipamentoComponent,
+    MovimentacoesComponent
   ],
   imports: [
     BrowserModule,

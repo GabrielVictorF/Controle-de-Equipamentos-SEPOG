@@ -8,11 +8,11 @@ import { ApiService } from '../api.service';
 })
 export class HomeComponent implements OnInit {
   public cards = [{
-    titulo: 'Empréstimos',
+    titulo: 'Movimentações',
     imagem: '../../../assets/img/transfer.png',
-    router: '/emprestimos',
-    descTexto: 'Visualizar empréstimos.',
-    descButton: 'Visualizar empréstimos'
+    router: '/movimentacoes',
+    descTexto: 'Visualizar movimentações.',
+    descButton: 'Visualizar movimentações'
   }, 
   {
     titulo: 'Equipamentos',
