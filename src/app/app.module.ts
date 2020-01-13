@@ -18,6 +18,7 @@ import { EditarComponent } from './editar/editar.component';
 import { NovoEquipamentoComponent } from './novo-equipamento/novo-equipamento.component';
 import { FunctionsService } from './functions.service';
 import { MovimentacoesComponent } from './movimentacoes/movimentacoes.component';
+import { NovaMovimentacaoComponent } from './nova-movimentacao/nova-movimentacao.component';
 
 Sentry.init({
   dsn: "https://e11bf940a0ff4e39b493d3f0a59ee0b7@sentry.io/1863399"
@@ -43,7 +44,8 @@ export class SentryErrorHandler implements ErrorHandler {
     EquipamentosComponent,
     EditarComponent,
     NovoEquipamentoComponent,
-    MovimentacoesComponent
+    MovimentacoesComponent,
+    NovaMovimentacaoComponent
   ],
   imports: [
     BrowserModule,

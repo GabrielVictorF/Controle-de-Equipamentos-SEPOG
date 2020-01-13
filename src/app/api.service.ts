@@ -75,4 +75,8 @@ export class ApiService {
   public getGroupEquipModelo() {
     return this.http.get(`${this.URL}group_equip_modelo`, this.httpOptions);
   }
+
+  public getTipoMovimentacao() {
+    return this.http.get(`${this.URL}tipo_movimento`, this.httpOptions);
+  }
 }

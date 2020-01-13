@@ -1,7 +1,8 @@
 <div class="container">
-    <div class="row">
-        <div class="col">
-            <form (ngSubmit)="putEquipamento()">
+    <form (ngSubmit)="putEquipamento()">
+        
+        <div class="row">
+            <div class="col">
                 <div class="form-group">
                     <label for="tombamento">
                         Tombamento
@@ -10,6 +11,11 @@
                     <input type="text" class="form-control" id="tombamento"
                         [(ngModel)]="equipamento[0].equipamento_tomb" name="tombamento">
                 </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
                 <div class="form-group">
                     <label for="descricao">
                         Descrição
@@ -18,6 +24,11 @@
                     <input type="text" class="form-control" id="descricao"
                         [(ngModel)]="equipamento[0].equipamento_descricao" name="descricao">
                 </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
                 <div class="form-group">
                     <label for="tipo_equipamento">
                         Tipo de equipamento
@@ -29,6 +40,11 @@
                             {{x.tipo_equipamento_descricao}}</option>
                     </select>
                 </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
                 <div class="form-group">
                     <label for="modelo">
                         Modelo
@@ -37,13 +53,24 @@
                     <input type="text" class="form-control" id="modelo" [(ngModel)]="equipamento[0].modelo"
                         name="modelo">
                 </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
                 <div class="form-group">
                     <label for="fabricante">
                         Fabricante
                         <i class="fas fa-divide"></i>
                     </label>
-                    <input type="text" class="form-control" id="fabricante" [(ngModel)]="equipamento[0].fabricante" name="fabricante">
+                    <input type="text" class="form-control" id="fabricante" [(ngModel)]="equipamento[0].fabricante"
+                        name="fabricante">
                 </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
                 <div class="form-group">
                     <label for="num-serie">
                         N° Série
@@ -52,12 +79,12 @@
                     <input type="text" class="form-control" id="num-serie" [(ngModel)]="equipamento[0].num_serie"
                         name="num-serie">
                 </div>
-                {{equipamento.tipo_equipamento_id}}
-                <button type="submit" class="btn btn-primary btn-lg btn-block">
-                    Atualizar
-                    <i class="fas fa-save"></i>
-                </button>
-            </form>
+            </div>
         </div>
-    </div>
+
+        <button type="submit" class="btn btn-primary btn-lg btn-block">
+            Atualizar
+            <i class="fas fa-save"></i>
+        </button>
+    </form>
 </div>
