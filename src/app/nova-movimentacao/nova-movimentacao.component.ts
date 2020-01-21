@@ -9,14 +9,21 @@ import { FunctionsService } from '../functions.service';
 })
 export class NovaMovimentacaoComponent implements OnInit {
   public setores;
+  public pesquisa: any = {
+    'usuario': [],
+    'equipamento': []
+  };
   public tipo_movimentacao;
   public movimentacao = {
     setor_origem: '',
     setor_destino: '',
     observacao: '',
     data_movimentacao: '',
+    pesquisa_equipamento: '',
+    pesquisa_usuario: '',
     tipo_movimentacao: 0
   }
+
   constructor(public api: ApiService, public functions: FunctionsService) { }
 
   ngOnInit() {
@@ -30,5 +37,13 @@ export class NovaMovimentacaoComponent implements OnInit {
 
   postMovimentacao() {
     console.log(this.movimentacao)
+  }
+
+  getPesquisaUsuario() {
+    this.api.getPesquisaUsuario(this.movimentacao.pesquisa_usuario).subscribe(res => this.pesquisa.usuario = res)
+  }
+
+  getPesquisaEquipamento() {
+    this.api.getPesquisaEquipamento(this.movimentacao.pesquisa_equipamento).subscribe(res => this.pesquisa.equipamento = res)
   }
 }

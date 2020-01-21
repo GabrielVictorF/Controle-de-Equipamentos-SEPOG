@@ -1,79 +1,146 @@
 <div class="container-fluid">
 
-        <form (ngSubmit)="postMovimentacao()">
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label for="tipo_movimentacao">
-                            Tipo de movimentacão
-                            <i class="fas fa-map-marker-alt"></i>
-                        </label>
-                        <select class="form-control" id="tipo_movimentacao" [(ngModel)]="movimentacao.tipo_movimentacao"
-                            name="tipo_movimentacao">
-                            <option *ngFor="let x of tipo_movimentacao" [ngValue]="x.tipomov_id">{{x.tipomov_descricao}}
-                            </option>
-                        </select>
+    <form (ngSubmit)="postMovimentacao()">
+
+        <div class="row">
+            <div class="col">
+                <!--<div class="form-group">
+                    <label for="pesquisa_usuario">
+                        Usuário responsável
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input type="search" [(ngModel)]="movimentacao.pesquisa_usuario" (keyup)="getPesquisaUsuario()" name="pesquisa_usuario" id="pesquisa_usuario" class="form-control">
+                </div> -->
+                <!-- Button trigger modal -->
+          
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <ul class="list-group list-group-flush" *ngFor="let x of pesquisa.usuario">
+                    <li class="list-group-item">{{ x.usuario_nome }}</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row com-margin">
+            <div class="col">
+                <div class="form-group">
+                    <label for="pesquisa_equipamento">
+                        Equipamento(s) movimentados
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input type="search" [(ngModel)]="movimentacao.pesquisa_equipamento"
+                        (keyup)="getPesquisaEquipamento()" name="pesquisa_equipamento" id="pesquisa_equipamento"
+                        class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngFor="let x of pesquisa.equipamento">
+            <div class="col">
+
+                {{x.equipamento_descricao}}
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="tipo_movimentacao">
+                        Tipo de movimentacão
+                        <i class="fas fa-map-marker-alt"></i>
+                    </label>
+                    <select class="form-control" id="tipo_movimentacao" [(ngModel)]="movimentacao.tipo_movimentacao"
+                        name="tipo_movimentacao">
+                        <option *ngFor="let x of tipo_movimentacao" [ngValue]="x.tipomov_id">{{x.tipomov_descricao}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="setor_origem">
+                        Setor Origem
+                        <i class="fas fa-map-marker-alt"></i>
+                    </label>
+                    <select class="form-control" id="setor" [(ngModel)]="movimentacao.setor_origem" name="setor_origem">
+                        <option *ngFor="let x of setores" [ngValue]="x.setor_id">{{x.setor_descricao}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="setor_destino">
+                        Setor Destino
+                        <i class="fas fa-map-marker-alt"></i>
+                    </label>
+                    <select class="form-control" id="setor" [(ngModel)]="movimentacao.setor_destino"
+                        name="setor_destino">
+                        <option *ngFor="let x of setores" [ngValue]="x.setor_id">
+                            {{x.setor_descricao}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="observacao">
+                        Observação
+                        <i class="fas fa-info-circle"></i>
+                    </label>
+                    <input type="text" class="form-control" id="observacao" [(ngModel)]="movimentacao.observacao"
+                        name="observacao">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="data_movimentacao">
+                        Data da movimentacão
+                        <i class="fas fa-calendar-day"></i>
+                    </label>
+                    <input type="date" class="form-control" id="data_movimentacao"
+                        [(ngModel)]="movimentacao.data_movimentacao" name="data_movimentacao">
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">
+            Cadastrar
+            <i class="fas fa-save"></i>
+        </button>
+    </form>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+            Launch demo modal
+        </button>
+
+
+        <div class="modal fade" id="modalPesquisaUsuario" tabindex="-1" role="dialog"
+            aria-labelledby="modalPesquisaUsuario" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label for="setor_origem">
-                            Setor Origem
-                            <i class="fas fa-map-marker-alt"></i>
-                        </label>
-                        <select class="form-control" id="setor" [(ngModel)]="movimentacao.setor_origem" name="setor_origem">
-                            <option *ngFor="let x of setores" [ngValue]="x.setor_id">{{x.setor_descricao}}</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label for="setor_destino">
-                            Setor Destino
-                            <i class="fas fa-map-marker-alt"></i>
-                        </label>
-                        <select class="form-control" id="setor" [(ngModel)]="movimentacao.setor_destino"
-                            name="setor_destino">
-                            <option *ngFor="let x of setores" [ngValue]="x.setor_id">
-                                {{x.setor_descricao}}</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="row">
-                <div class="col">   
-                    <div class="form-group">
-                        <label for="observacao">
-                            Observação
-                            <i class="fas fa-info-circle"></i>
-                        </label>
-                        <input type="text" class="form-control" id="observacao" [(ngModel)]="movimentacao.observacao"
-                            name="observacao">
-                    </div>
-                </div>
-            </div>
-    
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label for="data_movimentacao">
-                            Data da movimentacão
-                            <i class="fas fa-calendar-day"></i>
-                        </label>
-                        <input type="date" class="form-control" id="data_movimentacao" [(ngModel)]="movimentacao.data_movimentacao"
-                            name="data_movimentacao">
-                    </div>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary btn-lg btn-block">
-                Cadastrar
-                <i class="fas fa-save"></i>
-            </button>
-        </form>
-    </div>
+        </div>
+</div>

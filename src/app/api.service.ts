@@ -79,4 +79,12 @@ export class ApiService {
   public getTipoMovimentacao() {
     return this.http.get(`${this.URL}tipo_movimento`, this.httpOptions);
   }
+
+  public getPesquisaUsuario(termo: string) {
+    return this.http.get(`${this.URL}usuario?usuario_nome=ilike.*${termo}*`, this.httpOptions);
+  }
+
+  public getPesquisaEquipamento(tombamento: string) {
+    return this.http.get(`${this.URL}equipamento?equipamento_tomb=ilike.*${tombamento}*`, this.httpOptions)
+  }
 }
