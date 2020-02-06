@@ -72,7 +72,7 @@ export class ApiService {
     return this.http.get(`${this.URL}group_equip_fabricante`, this.httpOptions);
   }
 
-  public getGroupEquipModelo() {
+  public getGroupEquipModelo() {  
     return this.http.get(`${this.URL}group_equip_modelo`, this.httpOptions);
   }
 
@@ -84,7 +84,56 @@ export class ApiService {
     return this.http.get(`${this.URL}usuario?usuario_nome=ilike.*${termo}*`, this.httpOptions);
   }
 
-  public getPesquisaEquipamento(tombamento: string) {
-    return this.http.get(`${this.URL}equipamento?equipamento_tomb=ilike.*${tombamento}*`, this.httpOptions)
+  public getPesquisaEquipamento(tombamento: string, exceto_equipamento?) {
+    let url = `${this.URL}equipamento?select=*,setor(*),tipo_equipamento(*)&equipamento_tomb=ilike.*${tombamento}*`;
+    console.log('XXXXXXX')
+    console.log(exceto_equipamento)
+    exceto_equipamento.forEach((element, index) => {
+      url += `&equipamento_id=neq.${exceto_equipamento[index]}`;
+    });
+    return this.http.get(url, this.httpOptions)
+  }
+
+  public postMovimentacao(movimentacao): any { // Insert na tabela de movimentacao
+    let url = `${this.URL}movimentacao`;
+    let body = {
+      setor_origem_id: movimentacao.setor_origem,
+      setor_destino_id: movimentacao.setor_destino,
+      tipomovi_id: movimentacao.tipo_movimentacao,
+      observacao: movimentacao.observacao,
+      data_movimentacao: movimentacao.data_movimentacao
+    }
+
+    this.http.post(`${this.URL}movimentacao`, body, this.httpOptions).subscribe(() => {
+      this.getUltimaMovimentacao().subscribe(res => {
+        
+        let arrayNew = [];
+        movimentacao.equipamentos.map(id => {
+          let body = {
+            movimentacao_id: res[0].movimentacao_id,
+            equipamento_id: id.equipamento_id
+          };
+          arrayNew.push(body);
+        });
+
+        console.log(arrayNew)
+        this.postEquipamentosMovimentados(movimentacao.equipamentos, res[0].movimentacao_id)
+      })
+    });
+  }
+  
+  public getUltimaMovimentacao() { // Recupera o ID da última movimentação
+    let url = `${this.URL}movimentacao?order=movimentacao_id.desc&limit=1`;
+    return this.http.get(url, this.httpOptions);
+  }
+
+  public postEquipamentosMovimentados(equipamento_id, movimentacao_id) { // Insert na tabela de equipamentos movimentados
+    let body = {
+      equipamento_id: equipamento_id,
+      movimentacao_id: movimentacao_id
+    }
+    console.log(body)
+    let url = `${this.URL}equipamento_movimentado`;
+    return this.http.post(url, body, this.httpOptions);
   }
 }

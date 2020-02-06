@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { FunctionsService } from '../functions.service';
+import {Observable, fromEvent} from 'rxjs';
 
 @Component({
   selector: 'app-nova-movimentacao',
@@ -9,22 +10,28 @@ import { FunctionsService } from '../functions.service';
 })
 export class NovaMovimentacaoComponent implements OnInit {
   public setores;
+  private equipamento_selecionado: boolean = false;
   public pesquisa: any = {
-    'usuario': [],
-    'equipamento': []
+    usuario: [],
+    equipamento: []
   };
+
+  public equipamentos_selecionados = [];
   public tipo_movimentacao;
   public movimentacao = {
-    setor_origem: '',
-    setor_destino: '',
+    equipamentos: [],
+    setor_origem: 1,
+    setor_destino: 1,
     observacao: '',
     data_movimentacao: '',
     pesquisa_equipamento: '',
     pesquisa_usuario: '',
-    tipo_movimentacao: 0
+    tipo_movimentacao: 1
   }
 
-  constructor(public api: ApiService, public functions: FunctionsService) { }
+  constructor(public api: ApiService, public functions: FunctionsService) { 
+    //this.getPesquisaEquipamento();
+  }
 
   ngOnInit() {
     this.api.getSetores().subscribe(res => {
@@ -37,6 +44,11 @@ export class NovaMovimentacaoComponent implements OnInit {
 
   postMovimentacao() {
     console.log(this.movimentacao)
+    this.api.postMovimentacao(this.movimentacao).subscribe(res => {
+      this.functions.showToast('Movimentação criada com sucesso!', 'success');
+    }, Error => {
+      this.functions.showToast('Erro ao criar movimentação, favor tentar novamente!', 'error');
+    })
   }
 
   getPesquisaUsuario() {
@@ -44,6 +56,20 @@ export class NovaMovimentacaoComponent implements OnInit {
   }
 
   getPesquisaEquipamento() {
-    this.api.getPesquisaEquipamento(this.movimentacao.pesquisa_equipamento).subscribe(res => this.pesquisa.equipamento = res)
+      this.api.getPesquisaEquipamento(this.movimentacao.pesquisa_equipamento, this.movimentacao.equipamentos).subscribe(res => {this.pesquisa.equipamento = res, console.log(this.pesquisa.equipamento)})
+      
+  }
+
+  adicionaEquipamento(equipamento) {
+    console.log(equipamento)
+    this.equipamentos_selecionados.push(equipamento);
+    this.pesquisa.equipamento = [];
+    this.movimentacao.equipamentos.push(equipamento.equipamento_id); //GERANDO ERRO UNDEFINED
+    console.log(this.equipamentos_selecionados)
+  }
+
+  retiraEquipamento(index) {
+    this.equipamentos_selecionados.splice(index, 1); 
+    this.movimentacao.equipamentos = [];
   }
 }
