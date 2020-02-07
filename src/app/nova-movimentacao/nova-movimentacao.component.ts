@@ -43,12 +43,7 @@ export class NovaMovimentacaoComponent implements OnInit {
   }
 
   postMovimentacao() {
-    console.log(this.movimentacao)
-    this.api.postMovimentacao(this.movimentacao).subscribe(res => {
-      this.functions.showToast('Movimentação criada com sucesso!', 'success');
-    }, Error => {
-      this.functions.showToast('Erro ao criar movimentação, favor tentar novamente!', 'error');
-    })
+    this.api.postMovimentacao(this.movimentacao);
   }
 
   getPesquisaUsuario() {

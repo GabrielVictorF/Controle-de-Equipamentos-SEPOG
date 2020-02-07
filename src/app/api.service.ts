@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { encode } from 'punycode';
+import { FunctionsService } from './functions.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class ApiService {
     })
   });
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient, public functions: FunctionsService) { }
 
   public getTipoEquipamentos() {
     return this.http.get(`${this.URL}tipo_equipamento?order=tipo_equipamento_descricao`, this.httpOptions);
@@ -111,13 +112,19 @@ export class ApiService {
         movimentacao.equipamentos.map(id => {
           let body = {
             movimentacao_id: res[0].movimentacao_id,
-            equipamento_id: id.equipamento_id
+            equipamento_id: id
           };
+          console.log(id)
           arrayNew.push(body);
         });
 
         console.log(arrayNew)
-        this.postEquipamentosMovimentados(movimentacao.equipamentos, res[0].movimentacao_id)
+        this.http.post(`${this.URL}equipamento_movimentado`, arrayNew, this.httpOptions).subscribe(() => {
+          this.functions.showToast('Movimentação criada com sucesso!', 'success')
+        }, Error => {
+          this.functions.showToast('Erro ao criar movimentação, favor tentar novamente!', 'error');
+        });
+        //this.postEquipamentosMovimentados(arrayNew).subscribe(() => console.log('Concluído'))
       })
     });
   }
@@ -127,13 +134,8 @@ export class ApiService {
     return this.http.get(url, this.httpOptions);
   }
 
-  public postEquipamentosMovimentados(equipamento_id, movimentacao_id) { // Insert na tabela de equipamentos movimentados
-    let body = {
-      equipamento_id: equipamento_id,
-      movimentacao_id: movimentacao_id
-    }
-    console.log(body)
+  public postEquipamentosMovimentados(equipamentos) { // Insert na tabela de equipamentos movimentados
     let url = `${this.URL}equipamento_movimentado`;
-    return this.http.post(url, body, this.httpOptions);
+    return this.http.post(url, equipamentos, this.httpOptions);
   }
 }
