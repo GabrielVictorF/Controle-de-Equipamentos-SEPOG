@@ -1,1 +1,33 @@
-<p>works</p>
+<div class="container">
+    <div class="row" *ngFor="let x of movimentacoes; let i = index">
+        <div class="col">
+            <table class="table table-striped shadow table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Tombamento</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Setor Origem</th>
+                        <th scope="col">Setor Destino</th>
+                        <th scope="col">Data</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let y of x.equipamento; let indexY = index">
+                        <th scope="row">{{indexY + 1}}</th>
+                        <td>{{ y.equipamento_tomb }}</td>
+                        <td>{{ y.equipamento_descricao }}</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>{{ x.data_movimentacao }}</td>
+                        <td><button type="button" class="btn btn-outline-secondary com-margem"
+                                [routerLink]="['/editar-movimentacao', x.equipamento_id]">Editar <i class="far fa-edit"></i></button>
+                                <button type="button" class="btn btn-outline-danger" (click)="deletarMovimentacao(x.movimentacao_id)">Deletar <i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

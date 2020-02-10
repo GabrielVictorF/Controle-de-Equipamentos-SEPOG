@@ -8,6 +8,7 @@ import { EquipamentosComponent } from './equipamentos/equipamentos.component';
 import { EditarComponent } from './editar/editar.component';
 import { NovoEquipamentoComponent } from './novo-equipamento/novo-equipamento.component';
 import { NovaMovimentacaoComponent } from './nova-movimentacao/nova-movimentacao.component';
+import { EditarMovimentacaoComponent } from './editar-movimentacao/editar-movimentacao.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'equipamentos', component: EquipamentosComponent },
   { path: 'editar/:equipamento_id', component: EditarComponent},
-  { path: 'novo-equipamento', component: NovoEquipamentoComponent}
+  { path: 'novo-equipamento', component: NovoEquipamentoComponent},
+  { path: 'editar-movimentacao/:movimentacao_id', component: EditarMovimentacaoComponent }
 ];
 
 @NgModule({

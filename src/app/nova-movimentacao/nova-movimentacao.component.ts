@@ -20,8 +20,8 @@ export class NovaMovimentacaoComponent implements OnInit {
   public tipo_movimentacao;
   public movimentacao = {
     equipamentos: [],
-    setor_origem: 1,
-    setor_destino: 1,
+    setor_origem: 0,
+    setor_destino: 0,
     observacao: '',
     data_movimentacao: '',
     pesquisa_equipamento: '',

@@ -134,8 +134,8 @@ export class ApiService {
     return this.http.get(url, this.httpOptions);
   }
 
-  public postEquipamentosMovimentados(equipamentos) { // Insert na tabela de equipamentos movimentados
-    let url = `${this.URL}equipamento_movimentado`;
-    return this.http.post(url, equipamentos, this.httpOptions);
+  public getMovimentacoes() {
+    let url = `${this.URL}movimentacao?select=*, setor(*), tipo_movimento(*), equipamento_movimentado(*), equipamento(*)`;
+    return this.http.get(url, this.httpOptions);
   }
 }
