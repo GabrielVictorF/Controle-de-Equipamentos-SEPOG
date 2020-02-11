@@ -138,4 +138,9 @@ export class ApiService {
     let url = `${this.URL}movimentacao?select=*, setor(*), tipo_movimento(*), equipamento_movimentado(*), equipamento(*)`;
     return this.http.get(url, this.httpOptions);
   }
+
+  public deleteMovimentacao(movimentacao_id) {
+    let url = `${this.URL}movimentacao?movimentacao_id=eq.${movimentacao_id}`;
+    return this.http.delete(url, this.httpOptions);
+  }
 }
