@@ -10,7 +10,8 @@
                         <th scope="col">Setor Origem</th>
                         <th scope="col">Setor Destino</th>
                         <th scope="col">Data</th>
-                        <th scope="col">Ações</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Deletar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -21,10 +22,12 @@
                         <td>-</td>
                         <td>-</td>
                         <td>{{ x.data_movimentacao }}</td>
-                        <td rowspan="3" *ngIf="indexY == 0"><button type="button" class="btn btn-outline-secondary"
-                                [routerLink]="['/editar-movimentacao', x.equipamento_id]" >Editar <i
+                        <td rowspan="3" *ngIf="indexY == 0"><button
+                                type="button" class="btn btn-outline-secondary"
+                                [routerLink]="['/editar-movimentacao', x.movimentacao_id]">Editar <i
                                     class="far fa-edit"></i></button>
-                            <button type="button" class="btn btn-outline-danger"
+                        </td>
+                        <td rowspan="3" *ngIf="indexY == 0" class="d-flex align-content-center flex-wrap"><button type="button" class="btn btn-outline-danger"
                                 (click)="openModal(x.movimentacao_id)">Deletar <i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
@@ -50,7 +53,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" (click)="deletarMovimentacao()  ">Excluir</button>
+                <button type="button" class="btn btn-primary" (click)="deletarMovimentacao()">Excluir</button>
             </div>
         </div>
     </div>

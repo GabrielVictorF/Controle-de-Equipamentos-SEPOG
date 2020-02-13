@@ -30,6 +30,22 @@
         <div class="row">
             <div class="col">
                 <div class="form-group">
+                    <label for="setor">
+                        Setor onde o equipamento está
+                        <i class="fas fa-map-marker-alt"></i>
+                    </label>
+                    <select class="form-control" id="setor" [(ngModel)]="equipamento[0].setor_id"
+                        name="setor">    
+                        <option *ngFor="let x of setores" [ngValue]="x.setor_id">
+                            {{ x.setor_sigla }} - {{x.setor_descricao}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
                     <label for="tipo_equipamento">
                         Tipo de equipamento
                         <i class="fas fa-divide"></i>

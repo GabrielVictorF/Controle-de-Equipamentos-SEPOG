@@ -11,9 +11,13 @@ declare var $;
 })
 export class MovimentacoesComponent implements OnInit {
   public movimentacoes;
+  public setores;
   constructor(public api: ApiService, public functions: FunctionsService) { }
 
   ngOnInit() {
+    this.api.getSetores().subscribe(res => {
+      this.setores = res
+    });
     this.api.getMovimentacoes().subscribe(res => {
       this.movimentacoes = res;
     });
@@ -34,4 +38,3 @@ export class MovimentacoesComponent implements OnInit {
     })
   }
 }
-  

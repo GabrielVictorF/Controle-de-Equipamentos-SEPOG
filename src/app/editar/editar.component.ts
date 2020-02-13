@@ -19,10 +19,14 @@ export class EditarComponent implements OnInit {
     "num_serie": ""
   }];
   public tipos_equipamento;
+  public setores;
 
   constructor(public route: ActivatedRoute, public router: Router, public api: ApiService, public functions: FunctionsService) { }
 
   ngOnInit() {
+    this.api.getSetores().subscribe(res => {
+      this.setores = res
+    });
     this.api.getTipoEquipamentos().subscribe(res => {
       this.tipos_equipamento = res
     }, Error => {
