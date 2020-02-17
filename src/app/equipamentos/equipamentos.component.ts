@@ -19,8 +19,9 @@ export class EquipamentosComponent implements OnInit {
     fabricante: '',
     modelo: ''
   }
-  private carregando = false;
-  private paginaAtual = 1;
+  public carregando = false;
+  public paginaAtual = 1;
+  public term;
 
   constructor(public api: ApiService, public functions: FunctionsService) { }
 

@@ -20,7 +20,6 @@ export class RelatoriosComponent implements OnInit {
   public barChartData = [];
   //public barChartData: any = [{ data: [], label: '' }];
 
-
   constructor(public api: ApiService, public functions: FunctionsService) { }
 
   ngOnInit() {

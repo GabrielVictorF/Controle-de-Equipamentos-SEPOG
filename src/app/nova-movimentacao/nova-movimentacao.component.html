@@ -25,7 +25,7 @@
 
         <div class="row" *ngIf="equipamentos_selecionados.length > 0">
             <div class="col">
-                <button type="button" class="btn btn-primary equipamentos_selecionados" *ngFor="let x of equipamentos_selecionados; let i = index"  (click)="retiraEquipamento(index)">
+                <button type="button" class="btn btn-primary equipamentos_selecionados" *ngFor="let x of equipamentos_selecionados; let i = index"  (click)="retiraEquipamento(i)">
                     {{x.tipo_equipamento.tipo_equipamento_descricao  }} - {{x.equipamento_tomb}} 
                     <i class="fas fa-times"></i>
                 </button>

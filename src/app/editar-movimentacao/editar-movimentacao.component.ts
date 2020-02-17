@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditarMovimentacaoComponent implements OnInit {
 
+  public movimentacao;
+  
   constructor() { }
 
   ngOnInit() {
