@@ -7,7 +7,7 @@ import { FunctionsService } from './functions.service';
   providedIn: 'root'
 })
 export class ApiService {
-  public URL = 'http://35.247.211.8:3000/';
+  public URL = 'http://35.247.211.8:3100/';
   private httpOptions = ({
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -51,6 +51,18 @@ export class ApiService {
     };
     console.log(corpoReq)
     return this.http.put(`${this.URL}equipamento?equipamento_id=eq.${equipamento_id}`, corpoReq, this.httpOptions);
+  }
+
+  public putMovimentacao(movimentacao_id, body) {
+    const corpoReq = {
+      "movimentacao_id": body[0].movimentacao_id,
+      "tipomovi_id": body[0].tipomovi_id,
+      "observacao": body[0].observacao,
+      "data_movimentacao": body[0].data_movimentacao,
+      "setor_origem_id": body[0].setor_origem_id,
+      "setor_destino_id": body[0].setor_destino_id,
+    };
+    return this.http.put(`${this.URL}movimentacao?movimentacao_id=eq.${movimentacao_id}`, corpoReq, this.httpOptions);
   }
 
   public postEquipamento(body) {
@@ -134,8 +146,10 @@ export class ApiService {
     return this.http.get(url, this.httpOptions);
   }
 
-  public getMovimentacoes() {
+  public getMovimentacoes(movimentacao_id?) {
     let url = `${this.URL}movimentacao?select=*, setor(*), tipo_movimento(*), equipamento_movimentado(*), equipamento(*)`;
+    if (movimentacao_id)
+      url += `&movimentacao_id=eq.${movimentacao_id}`; 
     return this.http.get(url, this.httpOptions);
   }
 

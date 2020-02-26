@@ -1,14 +1,105 @@
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <div class="form-group">
-                <label for="data_movimentacao">
-                    Data da movimentacão
-                    <i class="fas fa-calendar-day"></i>
-                </label>
-                <input type="date" class="form-control" id="data_movimentacao"
-                    [(ngModel)]="movimentacao.data_movimentacao" name="data_movimentacao">
+<div class="d-flex align-items-center" *ngIf="requests_com_sucesso < 3">
+  <strong>Carregando... Favor aguarde...</strong>
+  <div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+</div>
+<div class="container-fluid" *ngIf="requests_com_sucesso == 3">
+    <form (ngSubmit)="putMovimentacao()">
+        <div class="row">
+            <div class="col">
+                <div class="input-group mb-3">
+                    <input type="text" [(ngModel)]="movimentacao.pesquisa_equipamento"
+                    name="pesquisa_equipamento" id="pesquisa_equipamento"
+                       class="form-control" placeholder="Tombamento do equipamento" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="getPesquisaEquipamento()"><i class="fas fa-search"></i></button>
+                    </div>
+                  </div>
             </div>
         </div>
-    </div>
+
+         <div class="row">
+            <div class="col">
+                <div class="list-group">
+                    <a class="list-group-item list-group-item-action" (click)="adicionaEquipamento(x)"
+                        *ngFor="let x of pesquisa.equipamento | slice:0:5; let i = index">{{i + 1}} -
+                        <strong>Tombamento: </strong>{{x.equipamento_tomb}} - <strong>Descrição:
+                        </strong>{{x.equipamento_descricao}}</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="tipo_movimentacao">
+                        Tipo de movimentacão
+                        <i class="fas fa-map-marker-alt"></i>
+                    </label>
+                    <select class="form-control" id="tipo_movimentacao" [(ngModel)]="movimentacao[0].tipomovi_id"
+                        name="tipo_movimentacao">
+                        <option *ngFor="let x of tipo_movimentacao" [ngValue]="x.tipomov_id">{{x.tipomov_descricao}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="setor_origem">
+                        Setor Origem
+                        <i class="fas fa-map-marker-alt"></i>
+                    </label>
+                    <select class="form-control" id="setor_origem" [(ngModel)]="movimentacao[0].setor_origem_id" name="setor_origem">
+                        <option *ngFor="let x of setores" [ngValue]="x.setor_id">{{x.setor_descricao}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="setor_destino">
+                        Setor Destino
+                        <i class="fas fa-map-marker-alt"></i>
+                    </label>
+                    <select class="form-control" id="setor_destino" [(ngModel)]="movimentacao[0].setor_destino_id"
+                        name="setor_destino">
+                        <option *ngFor="let x of setores" [ngValue]="x.setor_id">
+                            {{x.setor_descricao}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="observacao">
+                        Observação
+                        <i class="fas fa-info-circle"></i>
+                    </label>
+                    <input type="text" class="form-control" id="observacao" [(ngModel)]="movimentacao.observacao"
+                        name="observacao">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="data_movimentacao">
+                        Data da movimentacão
+                        <i class="fas fa-calendar-day"></i>
+                    </label>
+                    <input type="date" class="form-control" id="data_movimentacao"
+                        [(ngModel)]="movimentacao[0].data_movimentacao" name="data_movimentacao">
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">
+            Atualizar movimentação
+            <i class="fas fa-save"></i>
+        </button>
+    </form>
 </div>
