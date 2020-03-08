@@ -22,7 +22,7 @@ export class ApiService {
     return this.http.get(`${this.URL}tipo_equipamento?order=tipo_equipamento_descricao`, this.httpOptions);
   }
 
-  public getEquipamentos(equipamento_id?, tipo_equipamento_id?, setor_id?, fabricante?, modelo?) {
+  public getEquipamentos(equipamento_id?, tipo_equipamento_id?, setor_id?, fabricante?, modelo?, tombamento?) {
     let url = `${this.URL}equipamento?select=*,setor(*),tipo_equipamento(*)`;
 
     equipamento_id ? url += `&equipamento_id=eq.${equipamento_id}` : ''
@@ -34,20 +34,22 @@ export class ApiService {
     fabricante? url += `&fabricante=eq.${fabricante}` : ''
 
     modelo? url += `&modelo=eq.${modelo}` : ''
-  
+
+    tombamento? url += `&equipamento_tomb=ilike.*${tombamento}*` : ''
+
     return this.http.get(url, this.httpOptions);
   }
 
   public putEquipamento(equipamento_id, body) {
     const corpoReq = {
       "equipamento_id": body[0].equipamento_id,
-        "equipamento_tomb": body[0].equipamento_tomb,
-        "equipamento_descricao": body[0].equipamento_descricao,
-        "tipo_equipamento_id": body[0].tipo_equipamento_id,
-        "setor_id": body[0].setor_id,
-        "modelo": body[0].modelo,
-        "fabricante": body[0].fabricante,
-        "num_serie": body[0].num_serie
+      "equipamento_tomb": body[0].equipamento_tomb,
+      "equipamento_descricao": body[0].equipamento_descricao,
+      "tipo_equipamento_id": body[0].tipo_equipamento_id,
+      "setor_id": body[0].setor_id,
+      "modelo": body[0].modelo,
+      "fabricante": body[0].fabricante,
+      "num_serie": body[0].num_serie
     };
     console.log(corpoReq)
     return this.http.put(`${this.URL}equipamento?equipamento_id=eq.${equipamento_id}`, corpoReq, this.httpOptions);
@@ -99,11 +101,12 @@ export class ApiService {
 
   public getPesquisaEquipamento(tombamento: string, exceto_equipamento?) {
     let url = `${this.URL}equipamento?select=*,setor(*),tipo_equipamento(*)&equipamento_tomb=ilike.*${tombamento}*`;
-    console.log('XXXXXXX')
-    console.log(exceto_equipamento)
-    exceto_equipamento.forEach((element, index) => {
-      url += `&equipamento_id=neq.${exceto_equipamento[index]}`;
-    });
+
+    if (exceto_equipamento) {
+      exceto_equipamento.forEach((element, index) => {
+        url += `&equipamento_id=neq.${exceto_equipamento[index]}`;
+      });
+    }
     return this.http.get(url, this.httpOptions)
   }
 
@@ -119,7 +122,7 @@ export class ApiService {
 
     this.http.post(`${this.URL}movimentacao`, body, this.httpOptions).subscribe(() => {
       this.getUltimaMovimentacao().subscribe(res => {
-        
+
         let arrayNew = [];
         movimentacao.equipamentos.map(id => {
           let body = {
@@ -156,5 +159,28 @@ export class ApiService {
   public deleteMovimentacao(movimentacao_id) {
     let url = `${this.URL}movimentacao?movimentacao_id=eq.${movimentacao_id}`;
     return this.http.delete(url, this.httpOptions);
+  }
+
+  public deleteEquipamentoMovimentado(movimentacao_id, equipamentos) {
+    let url = `${this.URL}equipamento_movimentado?movimentacao_id=eq.${movimentacao_id}`;
+    this.http.delete(url, this.httpOptions).subscribe(() => {
+      let arrayNew = [];
+      equipamentos.map(id => {
+        let body = {
+          movimentacao_id: movimentacao_id,
+          equipamento_id: id
+        };
+        console.log(id)
+        arrayNew.push(body);
+      });
+
+      console.log(arrayNew)
+      this.http.post(`${this.URL}equipamento_movimentado`, arrayNew, this.httpOptions).subscribe(() => {
+        this.functions.showToast('Movimentação criada com sucesso!', 'success')
+      }, Error => {
+        this.functions.showToast('Erro ao criar movimentação, favor tentar novamente!', 'error');
+      });
+      //this.postEquipamentosMovimentados(arrayNew).subscribe(() => console.log('Concluído'))    });
+    });
   }
 }

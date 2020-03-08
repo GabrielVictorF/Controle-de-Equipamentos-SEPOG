@@ -17,7 +17,8 @@ export class EquipamentosComponent implements OnInit {
     tipo_equipamento_id: 0,
     setor_id: 0,
     fabricante: '',
-    modelo: ''
+    modelo: '',
+    tombamento: ''
   }
   public carregando = false;
   public paginaAtual = 1;
@@ -51,7 +52,7 @@ export class EquipamentosComponent implements OnInit {
 
   public getResultsFilter() {
     this.carregando = true;
-    this.api.getEquipamentos(null, this.filtro.tipo_equipamento_id, this.filtro.setor_id, this.filtro.fabricante, this.filtro.modelo).subscribe(res => {
+    this.api.getEquipamentos(null, this.filtro.tipo_equipamento_id, this.filtro.setor_id, this.filtro.fabricante, this.filtro.modelo, this.filtro.tombamento).subscribe(res => {
       this.equips = res, this.carregando = false
     },  Error => {
       this.functions.showToast('Erro ao obter a lista de equipamentos, favor recarregar a página!', 'error'),
