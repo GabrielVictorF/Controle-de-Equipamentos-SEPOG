@@ -81,7 +81,7 @@
                         <i class="fas fa-map-marker-alt"></i>
                     </label>
                     <select class="form-control" id="setor_origem" [(ngModel)]="movimentacao.setor_origem" name="setor_origem">
-                        <option *ngFor="let x of setores" [ngValue]="x.setor_id">{{x.setor_descricao}}</option>
+                        <option *ngFor="let x of setores" [ngValue]="x.setor_id">{{x.setor_sigla}}</option>
                     </select>
                 </div>
             </div>
@@ -97,7 +97,7 @@
                     <select class="form-control" id="setor_destino" [(ngModel)]="movimentacao.setor_destino"
                         name="setor_destino">
                         <option *ngFor="let x of setores" [ngValue]="x.setor_id">
-                            {{x.setor_descricao}}</option>
+                            {{x.setor_sigla}}</option>
                     </select>
                 </div>
             </div>

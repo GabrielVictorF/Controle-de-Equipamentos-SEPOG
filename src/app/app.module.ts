@@ -20,6 +20,7 @@ import { FunctionsService } from './functions.service';
 import { MovimentacoesComponent } from './movimentacoes/movimentacoes.component';
 import { NovaMovimentacaoComponent } from './nova-movimentacao/nova-movimentacao.component';
 import { EditarMovimentacaoComponent } from './editar-movimentacao/editar-movimentacao.component';
+import { DataPipe } from './data.pipe';
 
 Sentry.init({
   dsn: "https://e11bf940a0ff4e39b493d3f0a59ee0b7@sentry.io/1863399"
@@ -47,7 +48,8 @@ export class SentryErrorHandler implements ErrorHandler {
     NovoEquipamentoComponent,
     MovimentacoesComponent,
     NovaMovimentacaoComponent,
-    EditarMovimentacaoComponent
+    EditarMovimentacaoComponent,
+    DataPipe
   ],
   imports: [
     BrowserModule,

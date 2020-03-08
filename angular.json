@@ -38,7 +38,8 @@
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/@fortawesome/fontawesome-free/js/all.js",
-              "src/assets/js/jtoast.js/toast.min.js"
+              "src/assets/js/jtoast.js/toast.min.js",
+	      "node_modules/moment/min/moment.min.js"
             ]
           },
           "configurations": {
@@ -114,7 +115,8 @@
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/@fortawesome/fontawesome-free/js/js.css",
-              "src/assets/js/jtoast.js/toast.min.js"
+              "src/assets/js/jtoast.js/toast.min.js",
+	      "node_modules/moment/min/moment.min.js"
             ]
           }
         },

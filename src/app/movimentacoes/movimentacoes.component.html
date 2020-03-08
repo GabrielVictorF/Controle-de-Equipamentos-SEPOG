@@ -1,4 +1,4 @@
-<div class="container">
+<!--<div class="container">
     <div class="row" *ngFor="let x of movimentacoes; let i = index">
         <div class="col">
             <table class="table table-striped shadow table-bordered table-hover">
@@ -35,26 +35,45 @@
             </table>
         </div>
     </div>
+</div> -->
+
+<div class="container">
+    <div class="row" *ngFor="let x of movimentacoes; let i = index">
+        <div class="col">
+            <div class="card border-success mb-3">
+              <div class="card-header bg-transparent border-success">Setor origem -> Setor Destino</div>
+              <div class="card-body text-success">
+                <h5 class="card-title">{{ x.data_movimentacao | data }}</h5>
+                <p class="card-text">a</p>
+            </div>
+            <div class="card-footer bg-transparent border-success"><button
+                type="button" class="btn btn-outline-secondary"
+                [routerLink]="['/editar-movimentacao', x.movimentacao_id]">Editar <i
+                class="far fa-edit"></i></button><button type="button" class="btn btn-outline-danger"
+                (click)="openModal(x.movimentacao_id)">Deletar <i class="fas fa-trash"></i></button></div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Um momento...</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Tem certeza que deseja excluir o registro?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" (click)="deletarMovimentacao()">Excluir</button>
-            </div>
+aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Um momento...</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            Tem certeza que deseja excluir o registro?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" (click)="deletarMovimentacao()">Excluir</button>
         </div>
     </div>
+</div>
 </div>
