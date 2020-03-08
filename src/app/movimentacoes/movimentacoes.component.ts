@@ -13,13 +13,10 @@ declare var $;
 export class MovimentacoesComponent implements OnInit {
   public movimentacoes;
   public setores;
-  public data = '2020-12-12';
 
   constructor(public api: ApiService, public functions: FunctionsService) { }
 
   ngOnInit() {
-    this.data = moment().format(this.data, "DD-MM-YYYY");
-    console.log(this.data)
     this.api.getSetores().subscribe(res => {
       this.setores = res
     });

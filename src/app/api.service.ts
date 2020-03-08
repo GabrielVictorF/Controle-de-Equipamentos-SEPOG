@@ -68,7 +68,7 @@ export class ApiService {
   }
 
   public postEquipamento(body) {
-    return this.http.post(`${this.URL}cotec/public/equipamento`, body);
+    return this.http.post(`${this.URL}equipamento`, body);
   }
 
   public getSetores() {
