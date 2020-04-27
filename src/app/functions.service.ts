@@ -17,4 +17,15 @@ export class FunctionsService {
       closeOnClick: true
     });
   }
+
+  public dataHoje() {
+    const hoje = new Date().toLocaleDateString();
+    let data = {
+      dia: hoje.substring(0, 2),
+      mes: hoje.substring(3, 5),
+      ano: hoje.substring(6)
+    }
+
+    return `${data.ano}-${data.mes}-${data.dia}`
+  }
 }

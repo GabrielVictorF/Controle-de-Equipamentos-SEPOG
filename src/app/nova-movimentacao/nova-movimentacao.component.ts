@@ -15,6 +15,7 @@ export class NovaMovimentacaoComponent implements OnInit {
     usuario: [],
     equipamento: []
   };
+  public hoje = new Date().toDateString();
 
   public equipamentos_selecionados = [];
   public tipo_movimentacao;
@@ -23,7 +24,7 @@ export class NovaMovimentacaoComponent implements OnInit {
     setor_origem: 0,
     setor_destino: 0,
     observacao: '',
-    data_movimentacao: '',
+    data_movimentacao: this.functions.dataHoje(),
     pesquisa_equipamento: '',
     pesquisa_usuario: '',
     tipo_movimentacao: 1
@@ -43,7 +44,8 @@ export class NovaMovimentacaoComponent implements OnInit {
   }
 
   postMovimentacao() {
-    this.api.postMovimentacao(this.movimentacao);
+    //this.api.postMovimentacao(this.movimentacao);
+    console.log(this.movimentacao)
   }
 
   getPesquisaUsuario() {

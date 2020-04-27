@@ -21,7 +21,7 @@ export class EditarMovimentacaoComponent implements OnInit {
 	};
 
 	public equipamentos_selecionados = [];
-	public pesquisa = {
+	public pesquisa: any = {
 		equipamento: []
 	}
 	public requests_com_sucesso = 0;
@@ -68,6 +68,9 @@ export class EditarMovimentacaoComponent implements OnInit {
 	}
 
 	getPesquisaEquipamento() {
-		this.api.getPesquisaEquipamento(this.movimentacao.pesquisa_equipamento, this.movimentacao.equipamentos).subscribe(res => {this.pesquisa.equipamento = res, console.log(this.pesquisa.equipamento)}) 
+		this.api.getPesquisaEquipamento(this.movimentacao.pesquisa_equipamento, this.movimentacao.equipamentos).subscribe(res => {
+			this.pesquisa.equipamento = res, 
+			console.log(this.pesquisa.equipamento)
+		}) 
 	} 
 }

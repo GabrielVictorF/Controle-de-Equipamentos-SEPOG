@@ -45,7 +45,7 @@ export class EquipamentosComponent implements OnInit {
   }
 
   public getSemFiltros() {
-    if (this.filtro.tipo_equipamento_id == 0 && this.filtro.setor_id == 0 && this.filtro.modelo == '' && this.filtro.fabricante == '' ** this.filtro.tombamento == '')
+    if (this.filtro.tipo_equipamento_id == 0 && this.filtro.setor_id == 0 && this.filtro.modelo == '' && this.filtro.fabricante == '' && this.filtro.tombamento == '')
       return true;
     return false;
   }
