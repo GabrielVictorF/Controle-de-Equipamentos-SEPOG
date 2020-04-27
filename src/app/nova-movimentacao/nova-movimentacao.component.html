@@ -94,9 +94,9 @@
                         Setor Destino
                         <i class="fas fa-map-marker-alt"></i>
                     </label>
-                    <select class="form-control" id="setor_destino" [(ngModel)]="movimentacao.setor_destino"
-                        name="setor_destino">
-                        <option *ngFor="let x of setores" [ngValue]="x.setor_id">
+                    <select class="form-control" id="setor_destino" [(ngModel)]="movimentacao.setor_destino"    
+                        name="setor_destino" data-live-search="true">
+                        <option *ngFor="let x of setores" [ngValue]="x.setor_id" data-subtext="kk">
                             {{x.setor_sigla}}</option>
                     </select>
                 </div>
