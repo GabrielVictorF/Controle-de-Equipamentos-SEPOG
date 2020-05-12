@@ -7,7 +7,7 @@ import { FunctionsService } from './functions.service';
   providedIn: 'root'
 })
 export class ApiService {
-  public URL = 'http://35.247.211.8:3100/';
+  public URL = 'http://34.95.155.71:3100/';
   private httpOptions = ({
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
