@@ -22,7 +22,7 @@
     "@sentry/browser": "^5.10.2",
     "boostrap": "^2.0.0",
     "bootstrap": "^4.4.1",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "jquery": "^3.4.1",
     "native-toast": "^2.0.0",
     "ng2-charts": "^2.3.0",
